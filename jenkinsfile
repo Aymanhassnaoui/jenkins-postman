@@ -2,22 +2,19 @@ pipeline {
     agent {
         docker {
             image 'postman/newman'
-            args '-u 0:0' // Optionnel, selon si des permissions spécifiques sont nécessaires
+            args '-u 0:0' // Optionnel : Utilisé si des permissions spécifiques sont nécessaires
         }
-    }
-    environment {
-       
     }
     stages {
         stage('Run Newman Collection') {
             steps {
                 script {
-                   
+                    // Lancer la commande Docker pour exécuter la collection Newman
                     sh '''
                         docker run -v ${WORKSPACE}:/etc/newman \
                         --workdir /etc/newman \
                         -t postman/newman \
-                        run tp.json --color off --disable-unicode
+                        run collection-1.json --color off --disable-unicode
                     '''
                 }
             }
