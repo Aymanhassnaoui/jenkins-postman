@@ -1,18 +1,19 @@
 pipeline {
-    agent 
+    agent {
         docker {
-            image 'postman/newman:alpine' 
+            image 'postman/newman:alpine'  // Utilise l'image Docker contenant Newman
            
-        }
-
-
-    stages {
-        stage('Run  Tests avec Newman') {
-            steps {
-
-                bat 'newman run tp.json'
-            }
         }
     }
 
+    stages {
+        stage('Run Tests avec Newman') {
+            steps {
+                script {
+                  
+                    sh 'newman run tp.json'
+                }
+            }
+        }
+    }
 }
