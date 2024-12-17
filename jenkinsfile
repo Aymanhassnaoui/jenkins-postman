@@ -1,11 +1,18 @@
-
 pipeline {
     agent any
     stages {
         stage('Vérifier Newman') {
             steps {
                 echo 'Vérification de la version de Newman...'
-                bat 'C:\\Users\\ayman\\AppData\\Roaming\\npm\\newman.cmd -v' // Vérifier la version de Newman avec le chemin complet
+                bat 'C:\\Users\\ayman\\AppData\\Roaming\\npm\\newman.cmd -v' // Vérifier la version de Newman
+            }
+        }
+        
+        stage('Exécuter la collection Postman') {
+            steps {
+                echo 'Exécution de la collection Postman...'
+                // Remplacer le chemin par votre fichier de collection .json
+                bat 'C:\\Users\\ayman\\AppData\\Roaming\\npm\\newman.cmd run C:\Users\ayman\Desktop\pratique jenkins\postman jenkins\tp.json'
             }
         }
     }
