@@ -1,9 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('Check Newman Version') {
+        stage('Test Newman') {
             steps {
-                bat 'C:\\Users\\ayman\\AppData\\Roaming\\npm\\newman.cmd -v'
+                sh 'newman -v'
             }
         }
     }
