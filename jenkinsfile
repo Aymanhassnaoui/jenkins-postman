@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'postman/newman:alpine'  // Utilise l'image Docker contenant Newman
-           
+            image 'postman/newman:alpine'
+            args '-v C:/ProgramData/Jenkins/.jenkins/workspace/jenkins_tp_postman/:/etc/newman'  
         }
     }
 
@@ -10,8 +10,11 @@ pipeline {
         stage('Run Tests avec Newman') {
             steps {
                 script {
-                  
-                    sh 'newman run tp.json'
+            
+                    sh 'docker pull postman/newman:alpine'
+
+                    
+                    sh 'docker run --rm -v "$PWD:/etc/newman" postman/newman run /etc/newman/tp.json'
                 }
             }
         }
