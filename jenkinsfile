@@ -11,8 +11,8 @@ pipeline {
         stage('Exécuter la collection Postman') {
             steps {
                 echo 'Exécution de la collection Postman...'
-                // Remplacer le chemin par votre fichier de collection .json
-                bat 'C:\\Users\\ayman\\AppData\\Roaming\\npm\\newman.cmd run C:\\Users\\ayman\\Desktop\\pratique jenkins\\postman jenkins\\tp.json'
+                // Entourer le chemin du fichier collection et environnement de guillemets
+                bat '"C:\\Users\\ayman\\AppData\\Roaming\\npm\\newman.cmd" run "C:\\Users\\ayman\\Desktop\\pratique jenkins\\postman jenkins\\tp.json"'
             }
         }
     }
