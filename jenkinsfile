@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Afficher PATH') {
             steps {
-                sh 'echo $PATH'
+                bat 'echo %PATH%'
             }
         }
     }
