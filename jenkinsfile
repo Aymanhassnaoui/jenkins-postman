@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Run  Tests avec Newman') {
+            steps {
+
+                sh 'newman run tp.json'
+            }
+        }
+    }
+
+}
