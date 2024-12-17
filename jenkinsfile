@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Check Newman Version') {
             steps {
-                sh 'C:\\Users\\ayman\\AppData\\Roaming\\npm\\newman.cmd -v'
+                bat 'C:\\Users\\ayman\\AppData\\Roaming\\npm\\newman.cmd -v'
             }
         }
     }
