@@ -1,9 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('Test Newman') {
+        stage('Afficher PATH') {
             steps {
-                bat 'newman -v'
+                sh 'echo $PATH'
             }
         }
     }
