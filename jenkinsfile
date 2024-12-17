@@ -1,9 +1,21 @@
 pipeline {
     agent any
+    environment {
+       
+        NEWMAN = 'C:\\Users\\ayman\\AppData\\Roaming\\npm\\newman.cmd'
+        COLLECTION = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\jenkins tp postman\\tp.json' // Remplacez par le chemin réel de votre collection
+    }
     stages {
-        stage('Afficher PATH') {
+        stage('Vérifier Newman') {
             steps {
-                bat 'echo %PATH%'
+                echo 'Vérification de la version de Newman...'
+                bat '"${NEWMAN}" -v'
+            }
+        }
+        stage('Exécuter la collection Postman') {
+            steps {
+                echo 'Exécution de la collection Postman via Newman...'
+                bat '"${NEWMAN}" run "${COLLECTION}"'
             }
         }
     }
