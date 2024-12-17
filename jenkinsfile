@@ -1,28 +1,25 @@
 pipeline {
-    agent {
-        docker {
-            image 'postman/newman'
-            args '-u 0:0' // Optionnel : Utilisé si des permissions spécifiques sont nécessaires
-        }
-    }
+    agent any
+
     stages {
-        stage('Run Newman Collection') {
+        stage('Preparation') {
             steps {
                 script {
-                    // Lancer la commande Docker pour exécuter la collection Newman
-                    sh '''
-                        docker run -v ${WORKSPACE}:/etc/newman \
-                        --workdir /etc/newman \
-                        -t postman/newman \
-                        run collection-1.json --color off --disable-unicode
-                    '''
+                    echo 'Installing dependencies...'
                 }
+                // Installe Newman globalement
+                bat 'npm install -g newman'
             }
         }
-    }
-    post {
-        always {
-            echo 'Pipeline completed!'
+        
+        stage('Run Postman Collection') {
+            steps {
+                script {
+                    echo 'Running Postman collection using Newman...'
+                }
+              
+                bat 'newman run tp.json'
+            }
         }
     }
 }
