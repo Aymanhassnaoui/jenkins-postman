@@ -1,9 +1,11 @@
+
 pipeline {
     agent any
     stages {
-        stage('Check Newman Version') {
+        stage('Vérifier Newman') {
             steps {
-                sh 'C:\\Users\\ayman\\AppData\\Roaming\\npm\\newman.cmd -v'
+                echo 'Vérification de la version de Newman...'
+                bat 'C:\\Users\\ayman\\AppData\\Roaming\\npm\\newman.cmd -v' // Vérifier la version de Newman avec le chemin complet
             }
         }
     }
