@@ -1,22 +1,31 @@
 pipeline {
     agent {
         docker {
-            image 'postman/newman:alpine'
-            args '-v C:/ProgramData/Jenkins/.jenkins/workspace/jenkins_tp_postman/:/etc/newman'  
+            image 'postman/newman'
+            args '-u 0:0' // Optionnel, selon si des permissions spécifiques sont nécessaires
         }
     }
-
+    environment {
+       
+    }
     stages {
-        stage('Run Tests avec Newman') {
+        stage('Run Newman Collection') {
             steps {
                 script {
-            
-                    sh 'docker pull postman/newman:alpine'
-
-                    
-                    sh 'docker run --rm -v "$PWD:/etc/newman" postman/newman run /etc/newman/tp.json'
+                   
+                    sh '''
+                        docker run -v ${WORKSPACE}:/etc/newman \
+                        --workdir /etc/newman \
+                        -t postman/newman \
+                        run tp.json --color off --disable-unicode
+                    '''
                 }
             }
+        }
+    }
+    post {
+        always {
+            echo 'Pipeline completed!'
         }
     }
 }
