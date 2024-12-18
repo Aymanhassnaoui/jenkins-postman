@@ -16,9 +16,15 @@ pipeline {
         stage('Exécuter la collection Postman') {
             steps {
                 echo 'Exécution de la collection Postman...'
-              
-                sh 'newman run tp.json'  
+                sh 'newman run tp.json --reporters junit'  
             }
+        }
+    }
+
+    post {
+        always {
+           
+            junit 'newman/*.xml'
         }
     }
 }
