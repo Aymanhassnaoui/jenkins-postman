@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'postman/newman'  // Utilisation de l'image officielle Newman
+            image 'postman/newman:alpine'  // Utilisation de l'image officielle Newman
            
         }
     }
